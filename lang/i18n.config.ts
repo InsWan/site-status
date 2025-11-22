@@ -1,4 +1,5 @@
 import zh from "./locales/zh-CN.json";
+import zht from "./locales/zh-TW.json";
 import en from "./locales/en-US.json";
 import jp from "./locales/ja-JP.json";
 import kr from "./locales/ko-KR.json";
@@ -6,7 +7,7 @@ import kr from "./locales/ko-KR.json";
 export default defineI18nConfig(() => ({
   legacy: false,
   locale: "zh-CN",
-  messages: { "zh-CN": zh, "ja-JP": jp, "ko-KR": kr, en },
+  messages: { "zh-CN": zh, "zh-TW": zht, "zh-Hans": zh, "zh-Hant": zht, "ja-JP": jp, "ko-KR": kr, en },
   fallbackLocale: "zh-CN",
   // 语言偏好
   detectBrowserLanguage: {

@@ -43,7 +43,7 @@
           </n-button>
         </n-popselect>
         <!-- 菜单 -->
-        <n-dropdown trigger="click" :options="navMenu">
+        <n-dropdown v-if="visibleNavMenu.length" trigger="click" :options="visibleNavMenu">
           <n-button
             :focusable="false"
             :color="iconColor"
@@ -75,51 +75,64 @@ const statusStore = useStatusStore();
 const renderIcon = (icon: string) => () =>
   h(NIcon, null, () => h(Icon, { name: icon }));
 
-// 导航栏菜单
-const navMenu = computed<DropdownOption[]>(() => [
-  {
-    key: "github",
-    label: "GitHub",
-    icon: renderIcon("icon:github"),
-    props: {
-      onClick: () => window.open("https://github.com/imsyy/site-status"),
-    },
-  },
-  {
-    key: "about",
-    label: t("nav.about"),
-    icon: renderIcon("icon:info"),
-  },
-  {
-    key: "logout",
-    label: t("nav.logout"),
-    show: statusStore.loginStatus,
-    icon: renderIcon("icon:logout"),
-    props: {
-      onClick: () => {
-        window.$dialog.warning({
-          title: "退出登录",
-          content: "确定要退出登录吗?",
-          positiveText: "确定",
-          negativeText: "取消",
-          transformOrigin: "center",
-          onPositiveClick: async () => {
-            const { code } = await $fetch("/api/logout", {
-              method: "POST",
-            });
-            if (code !== 200) {
-              window.$message.error("退出登录失败");
-              return;
-            }
-            window.$message.success("退出登录成功");
-            statusStore.loginStatus = false;
-            localStorage.removeItem("authToken");
-          },
-        });
+// 导航栏菜单（logout 仅在 sitePassword 存在时显示）
+const navMenu = computed<DropdownOption[]>(() => {
+  const menu: DropdownOption[] = [
+    // {
+    //   key: "github",
+    //   label: "GitHub",
+    //   icon: renderIcon("icon:github"),
+    //   props: {
+    //     onClick: () => window.open("https://github.com/"),
+    //   },
+    // },
+    // {
+    //   key: "about",
+    //   label: t("nav.about"),
+    //   icon: renderIcon("icon:info"),
+    // },
+  ];
+
+  // 仅在站点配置了密码时显示退出登录项
+  const runtime = useRuntimeConfig();
+  const sitePassword = runtime.sitePassword;
+  if (sitePassword) {
+    menu.push({
+      key: "logout",
+      label: t("nav.logout"),
+      show: statusStore.loginStatus,
+      icon: renderIcon("icon:logout"),
+      props: {
+        onClick: () => {
+          window.$dialog.warning({
+            title: "退出登录",
+            content: "确定要退出登录吗?",
+            positiveText: "确定",
+            negativeText: "取消",
+            transformOrigin: "center",
+            onPositiveClick: async () => {
+              const { code } = await $fetch("/api/logout", {
+                method: "POST",
+              });
+              if (code !== 200) {
+                window.$message.error("退出登录失败");
+                return;
+              }
+              window.$message.success("退出登录成功");
+              statusStore.loginStatus = false;
+              localStorage.removeItem("authToken");
+            },
+          });
+        },
       },
-    },
-  },
-]);
+    });
+  }
+
+  return menu;
+});
+
+// 只包含实际显示的选项（过滤掉显式设置为 show: false 的项）
+const visibleNavMenu = computed(() => navMenu.value.filter((o) => o.show !== false));
 
 // 模式图标
 const themeIcon = computed(() => `icon:${colorMode.preference}-mode`);

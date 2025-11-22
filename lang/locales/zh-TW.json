@@ -1,0 +1,68 @@
+{
+  "uptimeRobot": "UptimeRobot",
+  "site": {
+    "loading": "站點狀態載入中",
+    "unknown": "站點狀態未知",
+    "normal": "站點運行正常",
+    "error": "全部站點出現異常",
+    "warn": "部分站點出現異常"
+  },
+  "nav": {
+    "about": "關於本站",
+    "logout": "退出登錄"
+  },
+  "header": {
+    "loading": "請稍等片刻 ...",
+    "unknown": "這可能是臨時性問題，請刷新後重試",
+    "update": "更新於",
+    "updateAt": "將於 {time} 後刷新"
+  },
+  "footer": {
+    "basedOn": "基於",
+    "interface": "介面",
+    "checkFrequency": "檢測頻率",
+    "fiveMinutes": "5 分鐘"
+  },
+  "card": {
+    "unknownDate": "未知日期",
+    "unknownData": "當日無數據",
+    "percent": "當日可用率 {percent}%",
+    "percentData": "故障 {times} 次，累計故障時長 {duration}，當日可用率 {percent}%",
+    "summary": "最近 {days} 天內可用率 {percent}%",
+    "summaryData": "最近 {days} 天內故障 {times} 次，累計故障時長 {duration}，平均可用率 {percent}%",
+    "error": "出錯啦",
+    "errorText": "介面調用超限或請求錯誤，請稍後重試",
+    "status": {
+      "stop": "暫停檢測",
+      "unknown": "還未檢查",
+      "pause": "暫停檢測",
+      "normal": "正常訪問",
+      "error": "站點異常",
+      "down": "無法訪問"
+    },
+    "type": {
+      "tip": "每間隔 {interval}，{type}來判斷段站點是否運行正常",
+      "HTTP": "通過發送 HTTP 或 HTTPS 請求來監測目標服務的可用性",
+      "KEYWORD": "通過獲取頁面內容，並檢查返回的內容是否包含指定的關鍵字",
+      "PING": "使用 ICMP 協議向目標伺服器發送 Ping 請求",
+      "PORT": "檢測目標伺服器的指定埠是否開放",
+      "HEARTBEAT": "由被監控的服務主動發送“心跳信號”到監控服務，表明自身正常運行"
+    }
+  },
+  "meta": {
+    "hour": "時",
+    "minute": "分",
+    "second": "秒",
+    "fastTip": "刷新過於頻繁，請稍後再試",
+    "refresh": "重試",
+    "today": "今日"
+  },
+  "login": {
+    "tip": "站點已開啟密碼保護，請輸入密碼登錄後查看",
+    "password": "密碼",
+    "placeholder": "請輸入密碼",
+    "submit": "登錄",
+    "error": "密碼錯誤，請重試",
+    "success": "登錄成功"
+  }
+}

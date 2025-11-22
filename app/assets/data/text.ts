@@ -28,6 +28,10 @@ export const langData: SelectOption[] = [
     value: "zh-CN",
   },
   {
+    label: "正體中文",
+    value: "zh-TW",
+  },
+  {
     label: "English",
     value: "en",
   },

@@ -9,7 +9,11 @@ export const jumpLink = (url: string) => window.open(url, "_blank");
  * @param num The number to format.
  * @returns The formatted number.
  */
-export const formatNumber = (num: number) => Math.floor(num * 100) / 100;
+export const formatNumber = (num: number | string | undefined) => {
+  const n = typeof num === "string" ? parseFloat(num) : typeof num === "number" ? num : NaN;
+  if (!isFinite(n) || Number.isNaN(n)) return 0;
+  return Math.floor(n * 100) / 100;
+};
 
 /**
  * Sleep for a certain amount of time.

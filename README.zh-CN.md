@@ -2,71 +2,83 @@
 
 <div align="center">
 <h1>site-status</h1>
-<p>一个基于 UptimeRobot API 的在线状态面板</p>
+<p>一个基于 UptimeRobot API 的在线站点状态面板</p>
 <br />
-<img src="https://img.shields.io/github/last-commit/imsyy/site-status" alt="last commit"/>
-<img src="https://img.shields.io/github/languages/code-size/imsyy/site-status" alt="code size"/>
-<img src="https://img.shields.io/github/stars/imsyy/site-status?style=full" alt="GitHub stars"/>
-<img src="https://img.shields.io/github/forks/imsyy/site-status?style=full&color=orange" alt="GitHub followers"/>
+<img src="https://img.shields.io/github/last-commit/inswan/site-status" alt="最后提交"/>
+<img src="https://img.shields.io/github/languages/code-size/inswan/site-status" alt="代码体积"/>
+<img src="https://img.shields.io/github/stars/inswan/site-status?style=social" alt="GitHub stars"/>
+<img src="https://img.shields.io/github/forks/inswan/site-status?style=social&color=orange" alt="GitHub forks"/>
 <br />
 <br />
-<img src="https://s1.ax1x.com/2023/07/20/pCHnLLt.png" alt="demo"/>
 </div>
 
-## 👀 Demo
+## 👀 在线演示
 
-> Demo password: `123456`
+- [InsWan 的站点状态页](https://status.inswan.fun/)
 
-- [IMSYY-站点监测](https://status.imsyy.top/)
+## 🎉 特色功能
 
-## 🎉 特色
+- 🌍 支持多平台部署（Vercel / Cloudflare Pages / NuxtHub 等）
+- ✨ 极简优雅、流畅丝滑的浏览体验
+- 🔐 支持整站密码保护（JWT + Hash）
+- 👀 全站监控一览无余
+- ⏲️ 数据自动定时刷新
+- 📱 完美移动端适配
 
-- 🌍 多平台部署支持
-- ✨ 优雅且流畅的浏览体验
-- 🔐 支持站点密码加密（JWT + Hash）
-- 👀 全站状态预览
-- ⏲️ 数据定时刷新
-- 📱 移动端适配
+## 前置准备
 
-## 事先准备
+你需要先：
 
-- 您需要先到 [UptimeRobot](https://uptimerobot.com/dashboard) 添加站点监控，并在 `My Settings` 页面或者 [API 管理](https://dashboard.uptimerobot.com/integrations) 页面获取类型为 `Read-Only API Key` 的 `API Key`，或者使用用于单独监视器的 `Monitor-specific API keys`（ 不要使用 `Main API key` ）
+1. 在 [UptimeRobot](https://uptimerobot.com/dashboard) 添加要监控的站点
+2. 在「My Settings」页面或 [API 设置页面](https://dashboard.uptimerobot.com/integrations) 获取 **Read-Only API Key**，  
+   也可以使用单个监视器的 **Monitor-specific API Key**  
+   ⚠️ **请勿使用 Main API Key**
 
-## 部署
+## 部署方式
 
-### Cloudflare
+### 推荐：Vercel（一键部署）
 
-本项目默认使用 [Cloudflare Pages](https://pages.cloudflare.com/) 来行部署
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/InsWan/site-status)
 
-- `star` 并 `fork` 本项目 😘
-- 可以使用全新的 [NuxtHub](https://hub.nuxt.com/) 来快捷的部署本项目，如果您有在 Vercel 上部署项目的经历，那么过程是大致相同的，当然，也可以使用 [Cloudflare Pages](https://pages.cloudflare.com/) 来部署
-- 在点击下一步之前请先配置好环境变量，具体内容请参考 `.env.example` 文件中的内容，其中 `API_KEY` 为必填项
-- 若进展顺利，你就可看到项目主页面了
+部署步骤：
+1. 点击上方按钮进入 Vercel 部署页面
+2. 必须配置以下环境变量：
 
-### Vercel
+   | 变量名              | 值          | 说明                          |
+   | ------------------- | ----------- | ----------------------------- |
+   | DEPLOYMENT_PLATFORM | auto        | Vercel 请保持 auto            |
+   | API_KEY             | 你的API密钥 | UptimeRobot 的 Read-Only 或 Monitor-specific Key |
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/imsyy/site-status)
+完成即用！🚀
 
-- 点击上方按钮以前往部署
-- 在环境变量中添加下方的内容（ 重要 ）
+### Cloudflare Pages
 
-  | **变量名称**        | **值** |
-  | ------------------- | ------ |
-  | DEPLOYMENT_PLATFORM | auto   |
-  | API_KEY             |        |
+需要手动将环境变量 `DEPLOYMENT_PLATFORM` 改为 `cloudflare`
 
-- 大功告成
+- Star 并 Fork 本仓库
+- 推荐使用全新的 [NuxtHub](https://hub.nuxt.com/) 一键部署（操作与 Vercel 几乎相同）
+- 也可以直接在 Cloudflare Pages 中手动部署
+- 部署前务必配置环境变量（参考 `.env.example`），`API_KEY` 为必填项
 
-### 其他托管平台
+### 其他平台
 
-请参考官方文档：[部署 Nuxt 应用](https://nuxtjs.org.cn/deploy)
+参考官方文档：[部署 Nuxt 应用](https://nuxt.com/docs/getting-started/deployment)
 
-## Q & A
+## 常见问题
 
-### 如何开启站点加密
+### 如何开启站点密码保护？
 
-在环境变量中添加 `SITE_PASSWORD` 和 `SITE_SECRE_KEY`，都必须填写，缺一不可，其中 `SITE_PASSWORD`是站点密码，`SITE_SECRE_KEY` 是加密密钥，可随意填写
+在环境变量中同时添加以下两项（两项缺一不可）：
+
+| 变量名            | 说明                                      |
+| ----------------- | ----------------------------------------- |
+| SITE_PASSWORD     | 访问站点时需要的密码（用户输入这个密码）   |
+| SITE_SECRE_KEY   | 加密用的密钥（随便填，越复杂越好）        |
+
 
 ## 鸣谢
 
-- [uptime-status](https://github.com/yb/uptime-status) 受此项目启发
+- 本项目 Fork 自 [imsyy/site-status](https://github.com/imsyy/site-status)
+- 受 [yb/uptime-status](https://github.com/yb/uptime-status) 启发
+
+感谢原作者的无私分享！❤️

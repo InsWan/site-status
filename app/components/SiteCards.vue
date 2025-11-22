@@ -69,7 +69,7 @@
             <template #trigger>
               <div
                 :style="{
-                  backgroundColor: `var(--${getDayStatus(day.percent)}-color)`,
+                  backgroundColor: `var(--${getDayStatus(day)}-color)`,
                 }"
                 class="day"
               />
@@ -82,7 +82,9 @@
               <n-text v-if="day?.percent >= 100">
                 {{ $t("card.percent", { percent: day?.percent }) }}
               </n-text>
-              <n-text v-else-if="day?.percent > 0 && day?.percent < 100">
+              <n-text
+                v-else-if="(day?.percent > 0 && day?.percent < 100) || (day?.percent === 0 && (day?.down?.times || day?.down?.duration))"
+              >
                 {{
                   $t("card.percentData", {
                     times: day?.down?.times,
@@ -178,10 +180,13 @@ const siteData = computed<SiteStatusType[] | undefined>(
 );
 
 // 当天站点状态
-const getDayStatus = (percent: number): SiteType => {
+const getDayStatus = (day: { percent: number; down?: { times: number; duration: number } }): SiteType => {
+  const percent = day?.percent ?? 0;
+  const hasDown = !!(day?.down && (day.down.times || day.down.duration));
   if (percent >= 100) return "normal";
   else if (percent >= 50 && percent < 100) return "warn";
   else if (percent > 0 && percent < 50) return "error";
+  else if (percent === 0 && hasDown) return "error";
   else return "unknown";
 };
 
